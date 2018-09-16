@@ -12,7 +12,8 @@ def scraper
   job_listings.each do |job_listing|
     job = {
       title: job_listing.css('span.job-title').text,
-      company: job_listing.css('span.company').text
+      company: job_listing.css('span.company').text,
+      location: job_listing.css('span.location').text
     }
   end
 
