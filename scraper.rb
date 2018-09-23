@@ -9,7 +9,7 @@ def scraper
   parsed_page = Nokogiri::HTML(unparsed_page)
   job_listings = parsed_page.css('div.listingCard') #50 jobs
   per_page = job_listings.count #50
-  total = parsed_page.css('div.job-count')
+  total = parsed_page.css('div.job-count').text.split(' ')[1].gsub(',','').to_i #total pages
 
   jobs = []
 
