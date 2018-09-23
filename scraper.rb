@@ -8,6 +8,7 @@ def scraper
   unparsed_page = HTTParty.get(url)
   parsed_page = Nokogiri::HTML(unparsed_page)
   job_listings = parsed_page.css('div.listingCard') #50 jobs
+  per_page = 50
 
   jobs = []
 
