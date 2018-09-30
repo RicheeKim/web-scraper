@@ -10,8 +10,8 @@ def scraper
   job_listings = parsed_page.css('div.listingCard') #50 jobs
   page = 1
   per_page = job_listings.count #50
-  last_page = 46
   total = parsed_page.css('div.job-count').text.split(' ')[1].gsub(',','').to_i #total pages
+  last_page = (total.to_f / per_page.to_f).round
 
   jobs = []
 
