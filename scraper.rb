@@ -14,16 +14,18 @@ def scraper
   last_page = (total.to_f / per_page.to_f).round
 
   jobs = []
+  while page <= last_page
+    job_listings.each do |job_listing|
+      pagination_url = "https://blockwork.cc/listings?page=#{page}"
+      job = {
+        title: job_listing.css('span.job-title').text,
+        company: job_listing.css('span.company').text,
+        location: job_listing.css('span.location').text,
+        url: "https://blockwork.cc" + job_listing.css('a')[0].attributes["href"].value
+      }
 
-  job_listings.each do |job_listing|
-    job = {
-      title: job_listing.css('span.job-title').text,
-      company: job_listing.css('span.company').text,
-      location: job_listing.css('span.location').text,
-      url: "https://blockwork.cc" + job_listing.css('a')[0].attributes["href"].value
-    }
-
-    jobs << job
+      jobs << job
+    end
   end
   byebug
 end
