@@ -15,8 +15,11 @@ def scraper
 
   jobs = []
   while page <= last_page
+    pagination_url = "https://blockwork.cc/listings?page=#{page}"
+    pagination_unparsed_page = HTTParty.get(pagination_url)
+    pagination_parsed_page = Nokogiri::HTML(pagination_unparsed_page)
+
     job_listings.each do |job_listing|
-      pagination_url = "https://blockwork.cc/listings?page=#{page}"
       job = {
         title: job_listing.css('span.job-title').text,
         company: job_listing.css('span.company').text,
