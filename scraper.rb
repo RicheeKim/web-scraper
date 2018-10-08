@@ -12,8 +12,8 @@ def scraper
   per_page = job_listings.count #50
   total = parsed_page.css('div.job-count').text.split(' ')[1].gsub(',','').to_i #total pages
   last_page = (total.to_f / per_page.to_f).round
-
   jobs = []
+
   while page <= last_page
     pagination_url = "https://blockwork.cc/listings?page=#{page}"
     pagination_unparsed_page = HTTParty.get(pagination_url)
