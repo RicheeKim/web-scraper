@@ -18,6 +18,7 @@ def scraper
     pagination_url = "https://blockwork.cc/listings?page=#{page}"
     pagination_unparsed_page = HTTParty.get(pagination_url)
     pagination_parsed_page = Nokogiri::HTML(pagination_unparsed_page)
+    pagination_job_listings = pagination_parsed_page.css('div.listingCard') 
 
     job_listings.each do |job_listing|
       job = {
