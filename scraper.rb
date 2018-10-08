@@ -16,6 +16,9 @@ def scraper
 
   while page <= last_page
     pagination_url = "https://blockwork.cc/listings?page=#{page}"
+    puts pagination_url
+    puts "Page: #{page}"
+    puts ''
     pagination_unparsed_page = HTTParty.get(pagination_url)
     pagination_parsed_page = Nokogiri::HTML(pagination_unparsed_page)
     pagination_job_listings = pagination_parsed_page.css('div.listingCard')
@@ -29,7 +32,9 @@ def scraper
       }
 
       jobs << job
+      puts "Added #{job[:title]}"
     end
+    page += 1
   end
   byebug
 end
